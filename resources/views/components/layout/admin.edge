@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      {{ title || "Loan Management Dashboard" }}
+    </title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js">
+      
+    </script>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @if ($slots?.meta)
+      {{{ await $slots?.meta() }}}
+    @endif
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <div class="min-h-screen flex">
+
+      @include('components/partials/sidebar/admin')
+      <div class="flex-1">
+        @include('components/partials/header/admin')
+
+        {{{ await $slots?.main() }}}
+      </div>
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,84 @@
+@layout.dashboard({ title: "Loan History" })
+  <div class="container mx-auto py-8 px-4">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">
+        Loan History
+      </h2>
+      <a href="/dashboard/new-loan" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+        <i class="fas fa-plus mr-2"></i>New Loan
+    </a>
+    </div>
+
+    {{-- //TODO: Work on the flash messge later --}}
+    @flashMessage('notification')
+      <div class="mb-8 p-4 text-green-900 bg-green-200">
+        {{ $message.message }}
+      </div>
+    @end
+      
+    <div class="bg-white rounded-xl shadow-sm">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead>
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              ID
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Amount
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Interest Rate
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Term (Months)
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Status
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Created At
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <!-- Loop through loans here -->
+          @each(loan in loans)
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <a href="/dashboard/loan-history/{{ loan.id }}" class="text-blue-600 hover:text-blue-800">
+                  {{ loan.id }}
+                </a>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                ${{ loan.amount }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ loan.interest_rate }}%
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ loan.term_months }} months
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <span
+                  class="
+                  inline-flex items-center px-2.5 py-0.5 rounded-full text-xs
+                  {{ loan.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' : '' }}
+                  {{ loan.status === 'APPROVED' ? 'bg-green-100 text-green-800' : '' }}
+                  {{ loan.status === 'REJECTED' ? 'bg-red-100 text-red-800' : '' }}
+                  {{ loan.status === 'PAID' ? 'bg-gray-100 text-gray-800' : '' }}
+                "
+                >
+                  {{ loan.status }}
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ loan.created_at }}
+              </td>
+            </tr>
+          @end
+            
+        </tbody>
+      </table>
+    </div>
+  </div>
+@end

@@ -1,0 +1,24 @@
+<aside class="bg-white w-64 min-h-screen shadow-sm border-r">
+  <div class="p-4">
+    <ul class="space-y-2">
+      <li>
+        <a href="/dashboard" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 {{ request.url() === '/dashboard' ? 'bg-gray-100' : '' }}">
+          <i class="fas fa-home text-gray-600"></i>
+          <span>Overview</span>
+        </a>
+      </li>
+      <li>
+        <a href="/dashboard/loan-history" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 {{ request.url() === '/dashboard/loan-history' ? 'bg-gray-100' : '' }}">
+          <i class="fas fa-history text-gray-600"></i>
+          <span>Loan History</span>
+        </a>
+      </li>
+      <li>
+        <a href="/dashboard/repayment-history" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 {{ request.url() === '/dashboard/repayment-history' ? 'bg-gray-100' : '' }}">
+          <i class="fas fa-money-bill-wave text-gray-600"></i>
+          <span>Repayments History</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside> 

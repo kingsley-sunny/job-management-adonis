@@ -1,0 +1,47 @@
+<header class="bg-gray-900 text-white py-10 px-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <a href="/" class="text-2xl font-bold">JobApply</a>
+    <nav>
+      <ul class="flex space-x-6 items-center">
+        <li>
+          <a href="/" class="hover:text-gray-400">Home</a>
+        </li>
+        <li>
+          <a href="/jobs" class="hover:text-gray-400">Jobs</a>
+        </li>
+
+        @if(auth.isAuthenticated)
+          <li>
+            <a href="/applications" class="hover:text-gray-400">Applied Jobs</a>
+          </li>
+        @end
+        
+        <li>
+          <a href="#contact" class="hover:text-gray-400">Contact</a>
+        </li>
+
+        @if(auth.isAuthenticated)
+          <p>
+            {{ auth.user?.name }}
+          </p>
+
+          <li>
+            <form action="/logout" method="post" class="">
+              <button class="hover:text-red-500 text-red-500 py-3 px-6 border border-red-500 rounded-xl">Logout</button>
+            </form>
+          </li>
+        @end
+        
+        @if(!auth.isAuthenticated)
+          <li>
+            <a href="/login" class="hover:text-gray-400 py-3 px-6 border rounded-xl">Login</a>
+          </li>
+          <li>
+            <a href="/register" class="hover:text-gray-400 py-3 px-6 rounded-xl bg-blue-500">Register</a>
+          </li>
+        @end
+        
+      </ul>
+    </nav>
+  </div>
+</header>

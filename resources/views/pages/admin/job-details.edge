@@ -1,0 +1,117 @@
+@layout.admin({title: 'Job Details'})
+
+  <div class="container mx-auto px-4 py-8">
+    <div class="bg-gray-100 shadow-lg rounded-lg p-6">
+      <!-- Header -->
+      <div class="border-b pb-4 mb-6">
+        <h1 class="text-3xl font-bold text-gray-900">
+          {{ job.title }}
+        </h1>
+        <p class="text-lg text-gray-600 mt-2">
+          {{ job.company_name }}
+        </p>
+      </div>
+
+      <!-- Job Details -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h2 class="text-xl font-semibold mb-4">
+            Job Information
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="text-gray-600 font-medium">Location</label>
+              <p class="text-gray-800">
+                {{ job.location }}
+              </p>
+            </div>
+
+            <div>
+              <label class="text-gray-600 font-medium">Salary</label>
+              <p class="text-gray-800">
+                {{ job.salary }}
+              </p>
+            </div>
+
+            <div>
+              <label class="text-gray-600 font-medium">Job Type</label>
+              <p class="text-gray-800">
+                {{ job.type }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold mb-4">
+            Additional Details
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="text-gray-600 font-medium">Posted By</label>
+              <p class="text-gray-800">
+                {{ job.createdBy?.name }}
+              </p>
+            </div>
+
+            <div>
+              <label class="text-gray-600 font-medium">Posted Date</label>
+              <p class="text-gray-800">
+                {{ job.created_at.toFormat('DD') }}
+              </p>
+            </div>
+
+            <div>
+              <label class="text-gray-600 font-medium">Last Updated</label>
+              <p class="text-gray-800">
+                {{ job.updated_at.toFormat('DD') }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job Description -->
+      <div class="mt-8">
+        <h2 class="text-xl font-semibold mb-4">
+          Job Description
+        </h2>
+        <div class="prose max-w-none">
+          {{ job.description }}
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-8 flex gap-4">
+        <a
+          href="/admin/jobs/{{ job.id }}/edit"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+        >
+          Edit Job
+          </a>
+        <form id="deleteForm">
+          <input type="hidden" name="id" value="{{ job.id }}" />
+          <button
+            type="button"
+            class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+            onclick="confirmDelete('{{ job.id }}')"
+          >
+            Delete Job
+        </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {{-- Delete Confirmation Script --}}
+  <script>
+    function confirmDelete(jobId) {
+      if (confirm("Are you sure you want to delete this job?")) {
+        const form = document.getElementById("deleteForm");
+        form.submit();
+      }
+    }
+  </script>
+@end

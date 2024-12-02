@@ -1,0 +1,49 @@
+<nav class="bg-white shadow-sm">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <h1 class="text-2xl font-bold text-gray-800">
+        <i class="fas fa-chart-line mr-2 text-blue-600"></i>
+        Loan Management Dashboard
+      </h1>
+      <div class="flex items-center space-x-4">
+        <div class="flex items-center">
+          <i class="fas fa-user text-gray-600 text-xl mr-2"></i>
+          @if(auth.isAuthenticated)
+            <span class="text-gray-700">{{ auth.user.name }}</span>
+          @end
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="bg-gray-900 text-white py-10 px-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <a href="#" class="text-2xl font-bold">JobApply</a>
+    <nav>
+      <ul class="flex space-x-6">
+        <li>
+          <a href="#" class="hover:text-gray-400">Home</a>
+        </li>
+        <li>
+          <a href="/jobs" class="hover:text-gray-400">Jobs</a>
+        </li>
+        <li>
+          <a href="/saved-jobs" class="hover:text-gray-400">Saved Jobs</a>
+        </li>
+        <li>
+          <a href="/applied-jobs" class="hover:text-gray-400">Applied Jobs</a>
+        </li>
+        <li>
+          <a href="#contact" class="hover:text-gray-400">Contact</a>
+        </li>
+        <div class="flex items-center">
+          <i class="fas fa-user text-gray-600 text-xl mr-2"></i>
+          @if(auth.isAuthenticated)
+            <span class="text-gray-700">{{ auth.user.name }}</span>
+          @end
+        </div>
+      </ul>
+    </nav>
+  </div>
+</header>

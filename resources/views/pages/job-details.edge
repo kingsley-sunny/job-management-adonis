@@ -1,0 +1,116 @@
+@layout.app({title: 'Job Details'})
+
+  <div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      @flashMessage('notification')
+        <div class="p-6 bg-green-200 mb-6 mt-4 text-green-900 {{ $message.type }}">
+          {{ $message.message }}
+        </div>
+      @end
+      
+      <!-- Header -->
+      <div class="border-b pb-4 mb-6">
+        <h1 class="text-3xl font-bold text-gray-900">
+          {{ job.title }}
+        </h1>
+        <p class="text-lg text-gray-600 mt-2">
+          {{ job.company_name }}
+        </p>
+      </div>
+
+      <!-- Job Details -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h2 class="text-xl font-semibold mb-4">
+            Job Information
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="text-gray-600 font-medium">Location</label>
+              <p class="text-gray-800">
+                {{ job.location }}
+              </p>
+            </div>
+
+            <div>
+              <label class="text-gray-600 font-medium">Salary</label>
+              <p class="text-gray-800">
+                {{ job.salary }}
+              </p>
+            </div>
+
+            <div>
+              <label class="text-gray-600 font-medium">Job Type</label>
+              <p class="text-gray-800">
+                {{ job.type }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold mb-4">
+            Additional Details
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label class="text-gray-600 font-medium">Posted By</label>
+              <p class="text-gray-800">
+                {{ job.createdBy?.name }}
+              </p>
+            </div>
+
+            <div>
+              <label class="text-gray-600 font-medium">Posted Date</label>
+              <p class="text-gray-800">
+                {{ job.created_at.toFormat('DD') }}
+              </p>
+            </div>
+
+            <div>
+              <label class="text-gray-600 font-medium">Last Updated</label>
+              <p class="text-gray-800">
+                {{ job.updated_at.toFormat('DD') }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job Description -->
+      <div class="mt-8">
+        <h2 class="text-xl font-semibold mb-4">
+          Job Description
+        </h2>
+        <div class="prose max-w-none">
+          {{ job.description }}
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      @if(auth.isAuthenticated)
+        <div class="mt-8 flex gap-4">
+          <form action="/jobs/apply" method="post">
+            <input type="hidden" name="job_id" value="{{ job.id }}" />
+            <button class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 font-medium">
+              Apply Now
+      </button>
+          </form>
+        </div>
+      @end
+      
+      @if(!auth.isAuthenticated)
+        <div class="mt-8 flex gap-4">
+          <a
+            href="/login?nextUrl={{ request.url() }}"
+            class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 font-medium"
+          >
+            Apply Now
+</a>
+        </div>
+      @end
+    </div>
+  </div>
+@end

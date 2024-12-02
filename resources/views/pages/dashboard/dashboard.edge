@@ -1,0 +1,214 @@
+@layout.dashboard({ title: "Loan Management Dashboard" })
+  <!-- Main Content -->
+  <div class="container mx-auto py-8 px-4">
+    <!-- Main Content -->
+    <div class="container mx-auto py-8 px-4">
+      <!-- Summary Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md 
+  transition">
+          <div class="flex items-center">
+            <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+              <i class="fas fa-file-invoice-dollar text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-gray-500 text-sm">
+                Total Loans
+              </p>
+              <h3 class="text-2xl font-bold text-gray-800">
+                1,250
+              </h3>
+              <p class="text-green-500 text-sm">
+                <i class="fas fa-arrow-up mr-1"></i>12% vs last month
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md 
+  transition">
+          <div class="flex items-center">
+            <div class="p-3 rounded-full bg-green-100 text-green-600">
+              <i class="fas fa-check-circle text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-gray-500 text-sm">
+                Approved Loans
+              </p>
+              <h3 class="text-2xl font-bold text-gray-800">
+                1,125
+              </h3>
+              <p class="text-green-500 text-sm">
+                <i class="fas fa-arrow-up mr-1"></i>8% vs last month
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md 
+  transition">
+          <div class="flex items-center">
+            <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+              <i class="fas fa-money-bill-wave text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-gray-500 text-sm">
+                Disbursed Loans
+              </p>
+              <h3 class="text-2xl font-bold text-gray-800">
+                1,050
+              </h3>
+              <p class="text-green-500 text-sm">
+                <i class="fas fa-arrow-up mr-1"></i>5% vs last month
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md 
+  transition">
+          <div class="flex items-center">
+            <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+              <i class="fas fa-chart-pie text-xl"></i>
+            </div>
+            <div class="ml-4">
+              <p class="text-gray-500 text-sm">
+                Repayment Rate
+              </p>
+              <h3 class="text-2xl font-bold text-gray-800">
+                90.5%
+              </h3>
+              <p class="text-red-500 text-sm">
+                <i class="fas fa-arrow-down mr-1"></i>2% vs last month
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Loan Trends Chart -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-bold text-gray-800">
+              <i class="fas fa-chart-line mr-2 text-blue-600"></i>Loan Trends
+            </h2>
+            <select class="px-3 py-1 border rounded-lg text-sm">
+              <option>
+                Last 6 Months
+              </option>
+              <option>
+                Last Year
+              </option>
+            </select>
+          </div>
+          <canvas id="loantrendschart" class="!h-64 max-h-64">
+          </canvas>
+        </div>
+
+        <!-- Repayment Status -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-bold text-gray-800">
+              <i class="fas fa-chart-pie mr-2 text-purple-600"></i>Repayment Status
+            </h2>
+            <div class="relative">
+              <canvas id="loanrepaymentrate" class="h-64">
+              </canvas>
+              <div
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+        text-center"
+              >
+                <p class="text-3xl font-bold text-gray-800">
+                  90.5%
+                </p>
+                <p class="text-sm text-gray-500">
+                  Repayment Rate
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Update chart configurations with new styles
+    // Loan Trends Chart
+    var loantrendsctx = document.getElementById("loantrendschart").getContext("2d");
+    
+    new Chart(loantrendsctx, {
+      type: "line",
+      data: {
+        labels: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun" ],
+        datasets: [ {
+          label: "Approved",
+          data: [ 80, 90, 85, 92, 88, 95 ],
+          borderColor: "#4F46E5",
+          backgroundColor: "rgba(79, 70, 229, 0.1)",
+          fill: true,
+          tension: .4
+        }, {
+          label: "Disbursed",
+          data: [ 70, 75, 80, 85, 82, 90 ],
+          borderColor: "#10B981",
+          backgroundColor: "rgba(16, 185, 129, 0.1)",
+          fill: true,
+          tension: .4
+        }, {
+          label: "Repaid",
+          data: [ 60, 65, 70, 75, 72, 80 ],
+          borderColor: "#F59E0B",
+          backgroundColor: "rgba(245, 158, 11, 0.1)",
+          fill: true,
+          tension: .4
+        } ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: "bottom"
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              borderDash: [ 2, 2 ]
+            }
+          }
+        }
+      }
+    });
+    // Repayment Rate Chart
+    
+    var loanrepaymentratectx = document.getElementById("loanrepaymentrate").getContext("2d");
+    
+    new Chart(loanrepaymentratectx, {
+      type: "doughnut",
+      data: {
+        datasets: [ {
+          data: [ 90.5, 9.5 ],
+          backgroundColor: [ "#4F46E5", "#E5E7EB" ],
+          borderWidth: 0
+        } ]
+      },
+      options: {
+        cutout: "75%",
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  </script>
+@end

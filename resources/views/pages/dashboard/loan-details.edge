@@ -1,0 +1,86 @@
+@layout.dashboard({ title:  `loan details` })
+  @slot('main')
+
+    <div class="max-w-lg mx-auto mt-6 p-6">
+
+      @flashMessage('notification')
+        <div class="mb-8 p-4 text-green-900 bg-green-200">
+          {{ $message.message }}
+        </div>
+      @end
+      
+      {{ inspect({loan}) }}
+      <header class="text-center mb-6">
+        <h1 class="text-2xl font-bold text-blue-500">
+          Loan Details
+        </h1>
+      </header>
+
+      <section class="mb-4">
+        <h2 class="text-xl font-semibold text-gray-700">
+          Loan Information
+        </h2>
+        <p class="mt-2">
+          <strong>Loan ID:</strong>
+          <span id="loan-id" class="text-gray-600">{{ loan.id }}</span>
+        </p>
+        <p>
+          <strong>User ID:</strong>
+          <span id="user-id" class="text-gray-600">{{ loan.user_id }}</span>
+        </p>
+        <p>
+          <strong>Amount:</strong>
+          ${{ loan.amount }}
+        </p>
+        <p>
+          <strong>Interest Rate:</strong>
+          <span id="interest-rate" class="text-gray-600">{{ loan.interest_rate }}%</span>
+        </p>
+        <p>
+          <strong>Term (Months):</strong>
+          <span id="term-months" class="text-gray-600">{{ loan.term_months }}</span>
+        </p>
+        <p>
+          <strong>Status:</strong>
+          <span id="status" class="text-gray-600">{{ loan.status }}</span>
+        </p>
+        <p>
+          <strong>Purpose:</strong>
+          <span id="purpose" class="text-gray-600">{{ loan.purpose }}</span>
+        </p>
+        <p>
+          <strong>Created At:</strong>
+          <span id="created-at" class="text-gray-600">{{ loan.created_at }}</span>
+        </p>
+        <p>
+          <strong>Updated At:</strong>
+          <span id="updated-at" class="text-gray-600">{{ loan.updated_at }}</span>
+        </p>
+      </section>
+
+      <section class="text-center">
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">
+          Repayment Options
+        </h2>
+        <button
+          class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+          onclick="repayLoan()"
+        >
+          Repay Loan
+      </button>
+      </section>
+
+      <footer class="mt-6 text-center">
+        <p class="text-gray-500">
+          &copy; 2024 Loan Management System
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      function repayLoan() {
+        alert("Repayment process initiated for Loan ID: " + document.getElementById("loan-id").innerText);
+      }
+    </script>
+  @end
+@end
